@@ -1,0 +1,94 @@
+<html>
+<html lang="en">
+<head>
+    <title>Course Registration Form</title>
+</head>
+<body>
+
+    <h2>Course Registration</h2>
+
+    <form id="registrationForm">
+
+        <label>Full Name:</label>
+        <input type="text" id="name" placeholder="Enter your name" required>
+        <br><br>
+
+        <label>Email Address:</label>
+        <input type="email" id="email" placeholder="Enter your email" required>
+        <br><br>
+
+        <label>Student ID:</label>
+        <input type="text" id="studentid" placeholder="Enter student ID" required>
+        <br><br>
+
+        <label>Course:</label>
+        <select id="course" required>
+            <option value="">Select Course</option>
+            <option value="Java">Java</option>
+            <option value="Python">Python</option>
+            <option value="Web Development">Web Development</option>
+            <option value="IoT">IoT</option>
+        </select>
+        <br><br>
+
+        <label>Additional Comments:</label>
+        <textarea id="comments" placeholder="Enter comments"></textarea>
+        <br><br>
+
+        <label>Phone Number:</label>
+        <input type="tel" id="phone" placeholder="10-digit number"
+               pattern="[0-9]{10}" maxlength="10" required>
+        <br><br>
+
+        <input type="checkbox" id="terms" required>
+        <label for="terms">I agree to the registration terms.</label>
+        <br><br>
+
+        <button type="submit">Register Now</button>
+        <button type="reset">Clear Form</button>
+
+    </form>
+
+    <script>
+        const form = document.getElementById("registrationForm");
+
+        form.addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            let name = document.getElementById("name").value.trim();
+            let email = document.getElementById("email").value.trim();
+            let studentid = document.getElementById("studentid").value.trim();
+            let course = document.getElementById("course").value;
+            let phone = document.getElementById("phone").value;
+            let terms = document.getElementById("terms").checked;
+
+            if (name === "") {
+                alert("Please enter your name!");
+            }
+            else if (email === "" || !email.includes("@") || !email.includes(".")) {
+                alert("Please enter a valid email address!");
+            }
+            else if (studentid === "") {
+                alert("Please enter your Student ID!");
+            }
+            else if (course === "") {
+                alert("Please select a course!");
+            }
+            else if (!/^[0-9]{10}$/.test(phone)) {
+                alert("Phone number must contain exactly 10 digits!");
+            }
+            else if (!terms) {
+                alert("Please accept the registration terms!");
+            }
+            else if (!form.checkValidity()) {
+                form.reportValidity();
+            }
+            else {
+                alert("Registration Successful!");
+                form.reset();
+            }
+        });
+    </script>
+
+</body>
+</html>
